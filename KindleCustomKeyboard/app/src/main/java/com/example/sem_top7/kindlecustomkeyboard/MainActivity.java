@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                     switch (keyCode) {
                         case KeyEvent.KEYCODE_BACK:
                             event.startTracking();
-                            Button btnBack = (Button) v.findViewById(R.id.btn_prev);
+                            Button btnBack = (Button) v.findViewById(R.id.cr05);
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                                 btnBack.setPressed(true);
                                 btnBack.invalidate();
@@ -189,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
                             return true;
                         case KeyEvent.KEYCODE_MENU:
                             event.startTracking();
-                            Button btnMenu = (Button) v.findViewById(R.id.space);
+                            Button btnMenu = (Button) v.findViewById(R.id.cr04);
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                                 btnMenu.setPressed(true);
                                 btnMenu.invalidate();
@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
                             return true;
                         case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
                             event.startTracking();
-                            Button btnCursorRight = (Button) v.findViewById(R.id.cursorRight);
+                            Button btnCursorRight = (Button) v.findViewById(R.id.space);
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                                 btnCursorRight.setPressed(true);
                                 btnCursorRight.invalidate();
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
                             return true;
                         case KeyEvent.KEYCODE_MEDIA_REWIND:
                             event.startTracking();
-                            Button btnCursorLeft = (Button) v.findViewById(R.id.cursorLeft);
+                            Button btnCursorLeft = (Button) v.findViewById(R.id.delete);
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                                 btnCursorLeft.setPressed(true);
                                 btnCursorLeft.invalidate();
@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
                             return true;
                         case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
                             event.startTracking();
-                            Button btnNext = (Button) v.findViewById(R.id.btn_next);
+                            Button btnNext = (Button) v.findViewById(R.id.cr55);
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                                 btnNext.setPressed(true);
                                 btnNext.invalidate();
@@ -241,11 +241,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-            buttonDrawable(R.id.btn_next, R.drawable.keyboard_bt_icon_play, layout, 0.75);
-            buttonDrawable(R.id.btn_prev, R.drawable.keyboard_bt_icon_back, layout, 0.75);
-            buttonDrawable(R.id.space, R.drawable.keyboard_bt_icon_menu, layout, 0.65);
-            buttonDrawable(R.id.cursorLeft, R.drawable.keyboard_bt_icon_rewind, layout, 0.65);
-            buttonDrawable(R.id.cursorRight, R.drawable.keyboard_bt_icon_fast_forward, layout, 0.65);
+            buttonDrawable(R.id.cr55, R.drawable.keyboard_bt_icon_play, layout, 0.75);
+            buttonDrawable(R.id.cr05, R.drawable.keyboard_bt_icon_back, layout, 0.75);
+            buttonDrawable(R.id.cr04, R.drawable.keyboard_bt_icon_menu, layout, 0.65);
+            buttonDrawable(R.id.delete, R.drawable.keyboard_bt_icon_rewind, layout, 0.65);
+            buttonDrawable(R.id.space, R.drawable.keyboard_bt_icon_fast_forward, layout, 0.65);
             pwindow.showAtLocation(layout, Gravity.BOTTOM, 0, 0);
         } catch (Exception e) {
             e.printStackTrace();
