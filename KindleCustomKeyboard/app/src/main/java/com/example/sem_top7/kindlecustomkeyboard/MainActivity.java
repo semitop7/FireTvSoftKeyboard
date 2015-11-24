@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private MenuItem searchItem;
     private PopupWindow pwindow;
-    private View layout;
+    private View pwindowView;
     private int keyboard = R.layout.grid_layout_keyboard_ftv_ru;
 
     @Override
@@ -91,21 +91,23 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void showCustomKeyboard(View view) {
-        popupWindow(keyboard);
+        popupWindow();
     }
 
     public void changeLangEn(View view) {
         keyboard=R.layout.grid_layout_keyboard_ftv_en;
-        pwindow.dismiss();
-        pwindow=null;
-        popupWindow(keyboard);
+        ViewGroup parent = (ViewGroup)pwindow.getContentView();
+        View C = ruLang(keyboard);
+        parent.removeAllViews();
+        parent.addView(C, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     public void changeLangUaRu(View view) {
         keyboard=R.layout.grid_layout_keyboard_ftv_ru;
-        pwindow.dismiss();
-        pwindow=null;
-        popupWindow(keyboard);
+        ViewGroup parent = (ViewGroup)pwindow.getContentView();
+        View C = ruLang(keyboard);
+        parent.removeAllViews();
+        parent.addView(C, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     public void btnPress(View view) {
@@ -159,78 +161,91 @@ public class MainActivity extends AppCompatActivity {
             editable.insert(start, btn.getText());
     }
 
-    public void popupWindow(int Layout) {
-        try {
-            LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            layout = inflater.inflate(Layout, null);
-            layout.setFocusable(true);
-            layout.setFocusableInTouchMode(true);
+    private Button btnLang;
+    private Button btnSpace;
+    private Button btnBack;
+    private Button btnDelete;
+    private Button btnNext;
 
+    public void popupWindow() {
+        try {
+            View layout = ruLang(keyboard);
             pwindow = new PopupWindow(layout, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, true);
-            pwindow.setFocusable(true);
-            pwindow.setOutsideTouchable(true);
-            pwindow.setBackgroundDrawable(new BitmapDrawable());
             pwindow.getContentView().setFocusableInTouchMode(true);
-            pwindow.getContentView().setOnKeyListener(new View.OnKeyListener() {
+            pwindow.showAtLocation(layout, Gravity.BOTTOM, 0, 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public View ruLang(int Layout) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        pwindowView = inflater.inflate(Layout, null);
+
+        btnBack = (Button) pwindowView.findViewById(R.id.back);
+        btnLang = (Button) pwindowView.findViewById(R.id.lang);
+        btnSpace = (Button) pwindowView.findViewById(R.id.space);
+        btnDelete = (Button) pwindowView.findViewById(R.id.delete);
+        btnNext = (Button) pwindowView.findViewById(R.id.next);
+
+        ViewGroup parentView = (ViewGroup)pwindowView;
+        for(int i=0; i < parentView.getChildCount(); i++) {
+            View childView = parentView.getChildAt(i);
+            childView.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     switch (keyCode) {
                         case KeyEvent.KEYCODE_BACK:
-                            event.startTracking();
-                            Button btnBack = (Button) v.findViewById(R.id.cr05);
+                            //event.startTracking();
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                                 btnBack.setPressed(true);
                                 btnBack.invalidate();
-                                btnBack.performClick();
                             } else {
+                                btnBack.performClick();
                                 btnBack.setPressed(false);
                                 btnBack.invalidate();
                             }
                             return true;
                         case KeyEvent.KEYCODE_MENU:
-                            event.startTracking();
-                            Button btnMenu = (Button) v.findViewById(R.id.cr04);
+                            //event.startTracking();
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                                btnMenu.setPressed(true);
-                                btnMenu.invalidate();
-                                btnMenu.performClick();
+                                btnLang.setPressed(true);
+                                btnLang.invalidate();
                             } else {
-                                btnMenu.setPressed(false);
-                                btnMenu.invalidate();
+                                btnLang.performClick();
+                                btnLang.setPressed(false);
+                                btnLang.invalidate();
                             }
                             return true;
                         case KeyEvent.KEYCODE_MEDIA_FAST_FORWARD:
-                            event.startTracking();
-                            Button btnCursorRight = (Button) v.findViewById(R.id.space);
+                            //event.startTracking();
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                                btnCursorRight.setPressed(true);
-                                btnCursorRight.invalidate();
-                                btnCursorRight.performClick();
+                                btnSpace.setPressed(true);
+                                btnSpace.invalidate();
+                                btnSpace.performClick();
                             } else {
-                                btnCursorRight.setPressed(false);
-                                btnCursorRight.invalidate();
+                                btnSpace.setPressed(false);
+                                btnSpace.invalidate();
                             }
                             return true;
                         case KeyEvent.KEYCODE_MEDIA_REWIND:
-                            event.startTracking();
-                            Button btnCursorLeft = (Button) v.findViewById(R.id.delete);
+                            //event.startTracking();
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                                btnCursorLeft.setPressed(true);
-                                btnCursorLeft.invalidate();
-                                btnCursorLeft.performClick();
+                                btnDelete.setPressed(true);
+                                btnDelete.invalidate();
+                                btnDelete.performClick();
                             } else {
-                                btnCursorLeft.setPressed(false);
-                                btnCursorLeft.invalidate();
+                                btnDelete.setPressed(false);
+                                btnDelete.invalidate();
                             }
                             return true;
                         case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
-                            event.startTracking();
-                            Button btnNext = (Button) v.findViewById(R.id.cr55);
+                            //event.startTracking();
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
                                 btnNext.setPressed(true);
                                 btnNext.invalidate();
-                                btnNext.performClick();
                             } else {
+                                btnNext.performClick();
                                 btnNext.setPressed(false);
                                 btnNext.invalidate();
                             }
@@ -241,15 +256,13 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-            buttonDrawable(R.id.cr55, R.drawable.keyboard_bt_icon_play, layout, 0.75);
-            buttonDrawable(R.id.cr05, R.drawable.keyboard_bt_icon_back, layout, 0.75);
-            buttonDrawable(R.id.cr04, R.drawable.keyboard_bt_icon_menu, layout, 0.65);
-            buttonDrawable(R.id.delete, R.drawable.keyboard_bt_icon_rewind, layout, 0.65);
-            buttonDrawable(R.id.space, R.drawable.keyboard_bt_icon_fast_forward, layout, 0.65);
-            pwindow.showAtLocation(layout, Gravity.BOTTOM, 0, 0);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+        buttonDrawable(R.id.next, R.drawable.keyboard_bt_icon_play, pwindowView, 0.75);
+        buttonDrawable(R.id.back, R.drawable.keyboard_bt_icon_back, pwindowView, 0.75);
+        buttonDrawable(R.id.lang, R.drawable.keyboard_bt_icon_menu, pwindowView, 0.65);
+        buttonDrawable(R.id.delete, R.drawable.keyboard_bt_icon_rewind, pwindowView, 0.65);
+        buttonDrawable(R.id.space, R.drawable.keyboard_bt_icon_fast_forward, pwindowView, 0.65);
+        return pwindowView;
     }
 
     public void registerEditText(int resid) {
@@ -303,33 +316,4 @@ public class MainActivity extends AppCompatActivity {
         Button btn = (Button) view.findViewById(btnId);
         btn.setCompoundDrawables(sd.getDrawable(), null, null, null);
     }
-
-    /*@Override
-      public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_MENU:
-                event.startTracking();
-                Button btnBack = (Button) findViewById(R.id.button);
-                btnBack.setPressed(true);
-                btnBack.invalidate();
-                btnBack.performClick();
-                return true;
-            default:
-                return super.onKeyDown(keyCode, event);
-        }
-    }
-
-    @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_MENU:
-                event.startTracking();
-                Button btnBack = (Button) findViewById(R.id.button);
-                btnBack.setPressed(false);
-                btnBack.invalidate();
-                return true;
-            default:
-                return super.onKeyDown(keyCode, event);
-        }
-    }*/
 }
