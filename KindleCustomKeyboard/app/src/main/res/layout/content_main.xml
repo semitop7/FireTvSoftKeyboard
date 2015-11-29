@@ -25,6 +25,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="PWindow"
         android:id="@+id/editText"
         android:layout_gravity="fill_horizontal"
         android:layout_columnSpan="3"
@@ -34,6 +35,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="DFragment"
         android:id="@+id/editText2"
         android:layout_gravity="fill_horizontal"
         android:layout_columnSpan="3"

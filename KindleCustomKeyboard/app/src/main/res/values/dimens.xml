@@ -12,4 +12,10 @@
     <dimen name="key_size_4x">174.0dip</dimen>
     <dimen name="key_size_5x">219.0dip</dimen>
     <dimen name="key_pressed_padding">1dp</dimen>
+    <dimen name="keyboard_header_input_font_size">20.0sp</dimen>
+    <dimen name="keyboard_header_input_field_height">39.0dip</dimen>
+    <dimen name="keyboard_width">412.0dip</dimen>
+    <dimen name="keyboard_height">287.0dip</dimen>
+    <dimen name="keyboard_padding">5dp</dimen>
+    <dimen name="keyboard_margin">2dp</dimen>
 </resources>

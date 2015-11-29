@@ -12,4 +12,6 @@
     <color name="colorBtnPressedFtv">#f0bc5b</color>
     <color name="colorBtnPressed">#f0bc5b</color>
     <color name="colorTransparent">#00000000</color>
+    <color name="keyboard_header_text_input_field">#ffdadada</color>
+    <color name="keyboard_header_form_current">#ffb2b2b2</color>
 </resources>
