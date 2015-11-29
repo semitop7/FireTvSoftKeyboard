@@ -24,6 +24,7 @@
         android:clickable="false"
         android:height="@dimen/keyboard_header_input_field_height"
         android:textSize="@dimen/keyboard_header_input_font_size"
+        android:textCursorDrawable="@null"
         android:textColor="@color/keyboard_header_text_input_field"
         android:backgroundTint="@color/keyboard_header_form_current"
         />

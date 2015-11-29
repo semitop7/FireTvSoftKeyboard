@@ -134,17 +134,12 @@ public class MainActivity extends AppCompatActivity {
             parent = (ViewGroup) pwindow.getContentView();
             return parent;
         }
-        if(alertKeyboard.isShowing() && alertKeyboard!=null) {
-            parent = (ViewGroup) alertKeyboard.getListView();
-            return parent;
-        }
         return parent;
     }
 
     public void changeLang(View view) {
         ViewGroup focusParent = (ViewGroup) keyboardView;
         ViewGroup parent = getViewGroup();
-
         View v = focusParent.getFocusedChild();
 
         focus = (v==null) ? R.id.cr00 : v.getId();
@@ -166,37 +161,42 @@ public class MainActivity extends AppCompatActivity {
         //pwindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
+    private EditText editText;
+
     public void btnPress(View view) {
         View focusCurrent = getWindow().getCurrentFocus();
-        EditText editText = (EditText) focusCurrent;
+        editText = (EditText) focusCurrent;
         Button btn = (Button) view;
         Object tag = btn.getTag();
-        Editable editable1 = editText.getText();
+        Editable editable1 = editTextView.getText();
 
-        int start = editText.getSelectionStart();
+        int start = editTextView.getSelectionStart();
         if (btn.getTag() != null) {
             switch (tag.toString()) {
                 case "space":
                     editable1.insert(start, " ");
+                    editText.setText(editTextView.getText());
                     break;
                 case "delete":
                     if (editable1 != null && start > 0) {
                         editable1.delete(start - 1, start);
+                        editText.setText(editTextView.getText());
                     }
                     break;
                 case "clear":
                     if (editable1 != null) {
                         editable1.clear();
+                        editText.setText(editTextView.getText());
                     }
                     break;
                 case "cursorLeft":
                     if (start > 0) {
-                        editText.setSelection(start - 1);
+                        editTextView.setSelection(start - 1);
                     }
                     break;
                 case "cursorRight":
-                    if (start < editText.length()) {
-                        editText.setSelection(start + 1);
+                    if (start < editTextView.length()) {
+                        editTextView.setSelection(start + 1);
                     }
                     break;
                 case "previos":
@@ -215,8 +215,11 @@ public class MainActivity extends AppCompatActivity {
                 default:
                     if (start == 0)
                         editable1.insert(start, btn.getText().toString().toUpperCase());
-                    else
+                    else {
                         editable1.insert(start, btn.getText());
+                    }
+                    editText.setText(editTextView.getText());
+
                     break;
             }
         }
@@ -227,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnBack;
     private Button btnDelete;
     private Button btnNext;
+    private EditText editTextView;
     private Button btnCursRight;
     private Button btnCursLeft;
 
@@ -241,6 +245,12 @@ public class MainActivity extends AppCompatActivity {
         btnNext = (Button) keyboardView.findViewById(R.id.next);
         btnCursRight = (Button) keyboardView.findViewById(R.id.cursorRight);
         btnCursLeft = (Button) keyboardView.findViewById(R.id.cursorLeft);
+        editTextView = (EditText) keyboardView.findViewById(R.id.keybEdit);
+
+        if(editText!=null && editTextView.length()==0) {
+            editTextView.setText(editText.getText());
+            editTextView.setSelection(editText.length());
+        }
 
         ViewGroup parentView = (ViewGroup)keyboardView;
         for(int i=0; i < parentView.getChildCount(); i++) {
