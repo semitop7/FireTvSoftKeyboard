@@ -2,6 +2,7 @@ package com.example.sem_top7.kindlecustomkeyboard;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private MenuItem searchItem;
     private PopupWindow pwindow;
     private View keyboardView;
+    DialogFragment dlg1;
     private boolean keyboard = true;
 
     public MainActivity() {
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        dlg1 = new Dialog1();
 
         registerEditText(R.id.editText, 1);
         registerEditText(R.id.editText2, 2);
@@ -112,7 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void DFragment(View view) {
         keyboardView = (keyboard==true) ? setLang(ru, R.id.cr00) : setLang(en, R.id.cr00);
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        dlg1.show(getFragmentManager(), "dlg1");
+        /*AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setView(keyboardView);
         alertKeyboard = builder.create();
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -120,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         lp.height = WindowManager.LayoutParams.MATCH_PARENT;
         alertKeyboard.show();
-        alertKeyboard.getWindow().setAttributes(lp);
+        alertKeyboard.getWindow().setAttributes(lp);*/
     }
 
     private int focus;
