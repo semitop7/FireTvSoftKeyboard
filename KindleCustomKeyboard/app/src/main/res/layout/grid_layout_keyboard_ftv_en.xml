@@ -9,25 +9,8 @@
     android:focusableInTouchMode="true"
     android:paddingLeft="@dimen/keyboard_padding"
     android:paddingRight="@dimen/keyboard_padding"
-    android:paddingTop="@dimen/keyboard_padding"
     android:background="@color/colorBacgroundFtv"
     android:focusable="true">
-
-    <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:layout_margin="@dimen/keyboard_margin"
-        android:id="@+id/keybEdit"
-        android:layout_gravity="fill"
-        android:layout_columnSpan="10"
-        android:focusable="false"
-        android:clickable="false"
-        android:height="@dimen/keyboard_header_input_field_height"
-        android:textSize="@dimen/keyboard_header_input_font_size"
-        android:textCursorDrawable="@null"
-        android:textColor="@color/keyboard_header_text_input_field"
-        android:backgroundTint="@color/keyboard_header_form_current"
-        />
 
     <Button
         android:layout_margin="@dimen/keyboard_margin"

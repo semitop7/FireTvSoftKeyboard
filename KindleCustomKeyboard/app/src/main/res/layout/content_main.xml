@@ -16,6 +16,7 @@
         android:background="@drawable/btn_shape_standart"
         android:text="Press"
         android:id="@+id/button"
+        android:onClick="testLayout"
         android:focusableInTouchMode="true"
         android:layout_row="0"
         android:layout_column="1">
@@ -26,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="PWindow"
+        android:hint="Custom Fire TV keyboard"
         android:id="@+id/editText"
         android:layout_gravity="fill_horizontal"
         android:layout_columnSpan="3"
@@ -35,7 +37,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="DFragment"
+        android:hint="Test..."
         android:id="@+id/editText2"
         android:layout_gravity="fill_horizontal"
         android:layout_columnSpan="3"
