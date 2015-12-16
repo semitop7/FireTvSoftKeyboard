@@ -831,10 +831,10 @@
     <Button
         android:layout_margin="@dimen/keyboard_margin"
         android:textAllCaps="false"
+        android:id="@+id/cr49"
+        android:tag="cr49"
 
         android:text="\@"
-        android:id="@+id/cr49"
-
         android:textColor="#FFFFFF"
         android:textSize="@dimen/input_text_size"
 
