@@ -3,16 +3,16 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorBtn">#3b3c3e</color>
+    <color name="colorBtn">#394349</color>
     <color name="colorBtnFtv">#3b3c3e</color>
     <color name="colorLongBtnFtv">#676869</color>
     <color name="colorBacgroundFtv">#373939</color>
-    <color name="colorBtnSelected">#00ffff</color>
+    <color name="colorBtnSelected">#82888b</color>
     <color name="colorBtnSelectedFtv">#eca220</color>
     <color name="colorBtnPressedFtv">#f0bc5b</color>
-    <color name="colorBtnPressed">#f0bc5b</color>
+    <color name="colorBtnPressed">#959c9f</color>
     <color name="colorTransparent">#00000000</color>
     <color name="keyboard_header_text_input_field">#ffdadada</color>
-    <color name="keyboard_hint_text_input_field">#64dadada</color>
+    <color name="keyboard_hint_text_input_field">#c8dadada</color>
     <color name="keyboard_header_form_current">#ffb2b2b2</color>
 </resources>

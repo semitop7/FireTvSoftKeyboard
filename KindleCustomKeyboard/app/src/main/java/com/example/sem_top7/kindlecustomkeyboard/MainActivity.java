@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +23,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         dlg1 = new Dialog1();
 
         registerEditText(R.id.editText, 1);
+        registerEditText(R.id.editText2, 2);
         //registerEditText(R.id.editText2, 1);
         //registerEditText(R.id.editText3);
     }
@@ -95,12 +100,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private View layout;
+    private boolean style;
 
-    public void  PWindow(View view) {
+    public void showPwindow() {
         editText = (EditText) getWindow().getCurrentFocus();
         try {
             keyboardView = (keyboard ==true) ? setLang(R.layout.grid_layout_keyboard_ftv_ru, R.id.cr00) : setLang(R.layout.grid_layout_keyboard_ftv_en, R.id.cr00);
             layout = getLayoutInflater().inflate(R.layout.layout_keyboard, null, false);
+            if(style) {
+                layout.setBackgroundColor(getResources().getColor(R.color.colorBtn));
+            }
             linear = (FrameLayout) layout.findViewById(R.id.keyboradMain);
             linear.addView(keyboardView);
 
@@ -123,7 +132,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void DFragment(View view) {
+    public void  pWindow1(View view) {
+        style=false;
+        showPwindow();
+    }
+
+    public void pWindow2(View view) {
+        style=true;
+        showPwindow();
         //keyboardView = (keyboard==true) ? setLang(ru, R.id.cr00) : setLang(en, R.id.cr00);
         //dlg1.show(getFragmentManager(), "dlg1");
         /*AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -146,12 +162,12 @@ public class MainActivity extends AppCompatActivity {
 
             switch (keyboardView.getId()) {
                 case R.id.grid_ru:
-                    keyboardView = setLang(R.layout.grid_layout_keyboard_ftv_en, focus);
                     keyboard=false;
+                    keyboardView = setLang(R.layout.grid_layout_keyboard_ftv_en, focus);
                     break;
                 default:
-                    keyboardView = setLang(R.layout.grid_layout_keyboard_ftv_ru, focus);
                     keyboard=true;
+                    keyboardView = setLang(R.layout.grid_layout_keyboard_ftv_ru, focus);
                     break;
             }
             linear.removeAllViews();
@@ -189,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                         editTextView.setText(editText.getText());
                     }
                     break;
-                case "cursorLeft":
+                /*case "cursorLeft":
                     if (start > 0) {
                         editText.setSelection(start - 1);
                     }
@@ -198,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                     if (start < editText.length()) {
                         editText.setSelection(start + 1);
                     }
-                    break;
+                    break;*/
                 case "previos":
                     View focusNew = editText.focusSearch(View.FOCUS_BACKWARD);
                     if (focusNew != null) {
@@ -235,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnDelete;
     private Button btnNext;
     private EditText editTextView;
+    private Animation anim;
 
     public View setLang(int Layout, int focusId) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -246,17 +263,25 @@ public class MainActivity extends AppCompatActivity {
         btnDelete = (Button) keyboardView.findViewById(R.id.delete);
         btnNext = (Button) keyboardView.findViewById(R.id.next);
 
-        ViewGroup parentView = (ViewGroup)keyboardView;
+        if(style) {
+            keyboardView.setBackgroundResource(R.color.colorBtn);
+           // keyboardView.setBackgroundColor(getResources().getColor(R.color.colorBtn, ));
+        }
+
+        final ViewGroup parentView = (ViewGroup)keyboardView;
         for(int i=0; i < parentView.getChildCount(); i++) {
-            View childView = parentView.getChildAt(i);
-            childView.setOnKeyListener(new View.OnKeyListener() {
+            Button childButton = (Button)parentView.getChildAt(i);
+            if(style) {
+                childButton.setBackgroundResource(R.drawable.btn_shape_standart);
+            }
+            childButton.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     switch (keyCode) {
                         case KeyEvent.KEYCODE_BACK:
                             //event.startTracking();
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                                ((ViewGroup) keyboardView).getFocusedChild().clearFocus();
+                                parentView.getFocusedChild().clearFocus();
                                 btnBack.requestFocus();
                                 btnBack.setPressed(true);
                                 btnBack.invalidate();
@@ -269,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
                         case KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE:
                             //event.startTracking();
                             if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                                ((ViewGroup) keyboardView).getFocusedChild().clearFocus();
+                                parentView.getFocusedChild().clearFocus();
                                 btnNext.requestFocus();
                                 btnNext.setPressed(true);
                                 btnNext.invalidate();
@@ -318,6 +343,24 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+
+        final float scale = getResources().getDisplayMetrics().density;
+
+        if(keyboard==true) {
+            btnBack.setPadding((int) (45 * scale + 0.5f), 0, (int) (45 * scale + 0.5f), 0);
+            btnLang.setPadding((int) (18 * scale + 0.5f), 0, (int) (18 * scale + 0.5f), 0);
+            btnSpace.setPadding((int) (23 * scale + 0.5f), 0, (int) (23 * scale + 0.5f), 0);
+            btnDelete.setPadding((int) (21 * scale + 0.5f), 0, (int) (21 * scale + 0.5f), 0);
+            btnNext.setPadding((int) (50 * scale + 0.5f), 0, (int) (50 * scale + 0.5f), 0);
+        } else {
+            btnBack.setPadding((int) (62 * scale + 0.5f), 0, (int) (62 * scale + 0.5f), 0);
+            btnLang.setPadding((int) (8 * scale + 0.5f), 0, (int) (8 * scale + 0.5f), 0);
+            btnSpace.setPadding((int) (28 * scale + 0.5f), 0, (int) (28 * scale + 0.5f), 0);
+            btnDelete.setPadding((int) (26 * scale + 0.5f), 0, (int) (26 * scale + 0.5f), 0);
+            btnNext.setPadding((int) (75 * scale + 0.5f), 0, (int) (75 * scale + 0.5f), 0);
+        }
+
+
         buttonDrawable(R.id.next, R.drawable.keyboard_bt_icon_play, keyboardView, 0.75);
         buttonDrawable(R.id.back, R.drawable.keyboard_bt_icon_back, keyboardView, 0.75);
         buttonDrawable(R.id.lang, R.drawable.keyboard_bt_icon_menu, keyboardView, 0.65);
@@ -350,7 +393,8 @@ public class MainActivity extends AppCompatActivity {
             // NOTE By setting the on click listener, we can show the custom keyboard again, by tapping on an edit box that already had focus (but that had the keyboard hidden).
             @Override
             public void onClick(View v) {
-                if(key==1) PWindow(v); if(key==2) DFragment(v);
+                if (key == 1) pWindow1(v);
+                if (key == 2) pWindow2(v);
             }
         });
         // Disable standard keyboard hard way

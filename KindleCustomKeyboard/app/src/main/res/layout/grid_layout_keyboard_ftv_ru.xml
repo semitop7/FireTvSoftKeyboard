@@ -27,7 +27,7 @@
         android:onClick="btnPress"
         android:nextFocusLeft="@+id/cr09"
         android:nextFocusUp="@+id/back">
-    <requestFocus/>
+        <requestFocus/>
     </Button>
 
     <Button
@@ -118,8 +118,8 @@
         android:onClick="btnPress"
         android:nextFocusUp="@+id/next"/>
 
-    <Button 
-        android:layout_margin="@dimen/keyboard_margin" 
+    <Button
+        android:layout_margin="@dimen/keyboard_margin"
         android:textAllCaps="false"
         android:text="ж"
         android:id="@+id/cr06"
@@ -455,7 +455,7 @@
         android:text="щ"
         android:id="@+id/cr25"
         android:tag="cr25"
-        
+
         android:textColor="#FFFFFF"
         android:textSize="@dimen/input_text_size"
 
@@ -472,7 +472,7 @@
         android:text="ы"
         android:id="@+id/cr26"
         android:tag="cr26"
-        
+
         android:textColor="#FFFFFF"
         android:textSize="@dimen/input_text_size"
 
@@ -489,7 +489,7 @@
         android:text="ь"
         android:id="@+id/cr27"
         android:tag="cr27"
-        
+
         android:textColor="#FFFFFF"
         android:textSize="@dimen/input_text_size"
 
@@ -506,7 +506,7 @@
         android:text="э"
         android:id="@+id/cr28"
         android:tag="cr28"
-        
+
         android:textColor="#FFFFFF"
         android:textSize="@dimen/input_text_size"
 
@@ -523,7 +523,7 @@
         android:text="ю"
         android:id="@+id/cr29"
         android:tag="cr29"
-        
+
         android:textColor="#FFFFFF"
         android:textSize="@dimen/input_text_size"
 
@@ -550,7 +550,7 @@
 
         android:background="@drawable/btn_shape_ftv"
         android:onClick="btnPress"
-        android:nextFocusLeft="@+id/cursorRight"/>
+        android:nextFocusLeft="@+id/cr39"/>
 
     <Button
         android:layout_margin="@dimen/keyboard_margin"
@@ -641,8 +641,41 @@
         android:layout_margin="@dimen/keyboard_margin"
         android:textAllCaps="false"
 
-        android:text="!"
+        android:text="-"
         android:id="@+id/cr36"
+        android:tag="cr35"
+
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/input_text_size"
+
+        android:layout_width="@dimen/key_size"
+        android:layout_height="@dimen/key_size"
+
+        android:background="@drawable/btn_shape_ftv"
+        android:onClick="btnPress"/>
+
+    <Button
+        android:layout_margin="@dimen/keyboard_margin"
+        android:textAllCaps="false"
+        android:id="@+id/cr37"
+        android:tag="cr49"
+
+        android:text="\@"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/input_text_size"
+
+        android:layout_width="@dimen/key_size"
+        android:layout_height="@dimen/key_size"
+
+        android:background="@drawable/btn_shape_ftv"
+        android:onClick="btnPress"/>
+
+    <Button
+        android:layout_margin="@dimen/keyboard_margin"
+        android:textAllCaps="false"
+
+        android:text="!"
+        android:id="@+id/cr38"
         android:tag="cr36"
 
         android:textColor="#FFFFFF"
@@ -659,41 +692,9 @@
         android:textAllCaps="false"
 
         android:text="\?"
-        android:id="@+id/cr37"
+        android:id="@+id/cr39"
         android:tag="cr37"
 
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/input_text_size"
-
-        android:layout_width="@dimen/key_size"
-        android:layout_height="@dimen/key_size"
-
-        android:background="@drawable/btn_shape_ftv"
-        android:onClick="btnPress" />
-
-    <Button
-        android:layout_margin="@dimen/keyboard_margin"
-        android:textAllCaps="false"
-        android:id="@+id/cursorLeft"
-        android:tag="cursorLeft"
-
-        android:text="◄"
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/input_text_size"
-
-        android:layout_width="@dimen/key_size"
-        android:layout_height="@dimen/key_size"
-
-        android:background="@drawable/btn_shape_ftv"
-        android:onClick="btnPress"/>
-
-    <Button
-        android:layout_margin="@dimen/keyboard_margin"
-        android:textAllCaps="false"
-        android:id="@+id/cursorRight"
-        android:tag="cursorRight"
-
-        android:text="►"
         android:textColor="#FFFFFF"
         android:textSize="@dimen/input_text_size"
 
@@ -723,11 +724,8 @@
         android:layout_columnSpan="2"
 
         android:background="@drawable/btn_shape_ftv"
-        android:paddingLeft="18dp"
-        android:paddingRight="18dp"
-        android:drawableLeft="@drawable/keyboard_key_icon_menu"
         android:onClick="changeLang"
-        android:nextFocusLeft="@+id/cr49"/>
+        android:nextFocusLeft="@+id/clear"/>
 
     <Button
         android:layout_margin="@dimen/keyboard_margin"
@@ -746,9 +744,6 @@
         android:layout_row="5"
         android:layout_gravity="fill"
         android:layout_columnSpan="3"
-        android:paddingLeft="23dp"
-        android:paddingRight="23dp"
-        android:drawableLeft="@drawable/keyboard_key_icon_fast_forward"
         android:background="@drawable/btn_shape_ftv"
         android:onClick="btnPress"/>
 
@@ -765,13 +760,14 @@
 
         android:layout_width="@dimen/key_size"
         android:layout_height="@dimen/key_size"
-        android:layout_column="7"
+        android:layout_column="8"
         android:layout_row="5"
         android:layout_gravity="fill"
         android:layout_columnSpan="2"
 
         android:background="@drawable/btn_shape_ftv"
-        android:onClick="btnPress" />
+        android:onClick="btnPress"
+        android:nextFocusRight="@id/lang"/>
 
     <Button
         android:layout_margin="@dimen/keyboard_margin"
@@ -790,31 +786,10 @@
         android:layout_column="5"
         android:layout_row="5"
         android:layout_gravity="fill"
-        android:layout_columnSpan="2"
-
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp"
-        android:drawableLeft="@drawable/keyboard_key_icon_rewind"
+        android:layout_columnSpan="3"
 
         android:background="@drawable/btn_shape_ftv"
         android:onClick="btnPress" />
-
-    <Button
-        android:layout_margin="@dimen/keyboard_margin"
-        android:textAllCaps="false"
-        android:id="@+id/cr49"
-        android:tag="cr49"
-
-        android:text="\@"
-        android:textColor="#FFFFFF"
-        android:textSize="@dimen/input_text_size"
-
-        android:layout_width="@dimen/key_size"
-        android:layout_height="@dimen/key_size"
-
-        android:background="@drawable/btn_shape_ftv"
-        android:onClick="btnPress"
-        android:nextFocusRight="@id/lang"/>
 
     <Button
         android:layout_margin="@dimen/keyboard_margin"
@@ -834,10 +809,7 @@
         android:layout_row="6"
         android:layout_gravity="fill"
         android:layout_columnSpan="5"
-        android:paddingLeft="45dp"
-        android:paddingRight="45dp"
         android:background="@drawable/btn_shape_long_ftv"
-        android:drawableLeft="@drawable/keyboard_bt_icon_back"
         android:onClick="btnPress"
         android:nextFocusLeft="@+id/next"
         android:nextFocusDown="@+id/cr02"/>
@@ -859,10 +831,7 @@
         android:layout_row="6"
         android:layout_gravity="fill"
         android:layout_columnSpan="5"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
         android:background="@drawable/btn_shape_long_ftv"
-        android:drawableLeft="@drawable/keyboard_key_icon_play"
         android:onClick="btnPress"
         android:nextFocusRight="@+id/back"
         android:nextFocusDown="@+id/cr07"/>
