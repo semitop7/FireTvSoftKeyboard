@@ -105,10 +105,10 @@ public class MainActivity extends AppCompatActivity {
     public void showPwindow() {
         editText = (EditText) getWindow().getCurrentFocus();
         try {
-            keyboardView = (keyboard ==true) ? setLang(R.layout.grid_layout_keyboard_ftv_ru, R.id.cr00) : setLang(R.layout.grid_layout_keyboard_ftv_en, R.id.cr00);
+            keyboardView = (keyboard==true) ? setLang(R.layout.grid_layout_keyboard_ftv_ru, R.id.cr00) : setLang(R.layout.grid_layout_keyboard_ftv_en, R.id.cr00);
             layout = getLayoutInflater().inflate(R.layout.layout_keyboard, null, false);
             if(style) {
-                layout.setBackgroundColor(getResources().getColor(R.color.colorBtn));
+                layout.setBackgroundResource(R.color.colorBtn);
             }
             linear = (FrameLayout) layout.findViewById(R.id.keyboradMain);
             linear.addView(keyboardView);
@@ -251,7 +251,6 @@ public class MainActivity extends AppCompatActivity {
     private Button btnDelete;
     private Button btnNext;
     private EditText editTextView;
-    private Animation anim;
 
     public View setLang(int Layout, int focusId) {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
